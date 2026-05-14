@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SideEye - Meta Ray-Ban Web Apps</title>
+    <meta name="description" content="The unofficial app store for Meta Ray-Ban displays. Sideload web apps easily.">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>SideEye</h1>
+            <p>The unofficial app store for Meta Ray-Ban displays</p>
+            
+            <div class="header-actions">
+                <input type="text" id="searchInput" placeholder="Search apps...">
+                <button id="devCtaBtn" class="btn primary-btn">Develop for Ray-Bans</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="app-grid" id="appGrid">
+            <!-- App cards will be injected here by JS -->
+        </div>
+    </main>
+
+    <footer>
+        <p>Created an app? We'd love to feature it.</p>
+        <a href="mailto:actampio@gmail.com?subject=New App Submission for SideEye" class="btn">Email to Submit App</a>
+    </footer>
+
+    <!-- App Details Modal -->
+    <div id="appModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeAppModal">&times;</span>
+            <h2 id="modalAppName">App Name</h2>
+            <p id="modalAppDesc">App description goes here.</p>
+            <div class="link-container">
+                <label for="sideloadLink">Sideload Link:</label>
+                <div class="copy-group">
+                    <input type="text" id="sideloadLink" readonly>
+                    <button id="copyBtn" class="btn">Copy</button>
+                </div>
+                <p class="help-text">Copy this link and send it to your glasses to sideload.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dev Info Modal -->
+    <div id="devModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeDevModal">&times;</span>
+            <h2>Develop Your Own Apps</h2>
+            <p>Meta Ray-Bans support lightweight web applications tailored for the glasses' unique display and interaction model.</p>
+            <p>Want to build your own? Check out the official Meta developer documentation:</p>
+            <a href="https://wearables.developer.meta.com/docs/develop/webapps/" target="_blank" class="meta-link">Meta Web Apps Documentation &rarr;</a>
+            <p>Once you've built something cool, submit it to us using the email link at the bottom of the page!</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
