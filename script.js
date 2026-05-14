@@ -4,7 +4,7 @@ const apps = [
         id: 1,
         name: "Relax",
         description: "A simple breathing meditation app designed for the additive display. Inhale and exhale to the rhythmic animation to center yourself. Specifically optimized for Meta Ray-Ban displays.",
-        link: "https://adamtampio.github.io/relax/"
+        link: "https://facebook.com/fb_viewapp/web_app_deep_link?appName=Relax&appUrl=https%3A%2F%2Flittlered311.github.io%2Fmeditateonrbmd%2F"
     }
 ];
 
