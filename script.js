@@ -6,6 +6,13 @@ const apps = [
         category: "Utility",
         description: "A simple breathing meditation app designed for the additive display. Inhale and exhale to the rhythmic animation to center yourself. Specifically optimized for Meta Ray-Ban displays.",
         link: "https://facebook.com/fb_viewapp/web_app_deep_link?appName=Relax&appUrl=https%3A%2F%2Flittlered311.github.io%2Fmeditateonrbmd%2F"
+    },
+    {
+        id: 2,
+        name: "Compass",
+        category: "Utility",
+        description: "Basic, lightweight compass app",
+        link: "https://facebook.com/fb_viewapp/web_app_deep_link?appName=Compass&appUrl=https%3A%2F%2Flittlered311.github.io%2FcompassRBMD%2F"
     }
 ];
 
