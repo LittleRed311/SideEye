@@ -72,6 +72,21 @@ input[type="text"]:focus {
     box-shadow: 0 0 0 3px rgba(0,0,0,0.1);
 }
 
+.filter-select {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: #fff;
+    cursor: pointer;
+    outline: none;
+}
+
+.filter-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0,0,0,0.1);
+}
+
 .btn {
     display: inline-block;
     padding: 0.75rem 1.5rem;
@@ -281,4 +296,28 @@ footer p {
 
 .meta-link:hover {
     text-decoration: underline;
+}
+
+.dev-mode-instructions {
+    background-color: var(--bg-color);
+    padding: 1.25rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    margin-top: 1.5rem;
+    font-size: 0.95rem;
+}
+
+.dev-mode-instructions h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.dev-mode-instructions ol {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+    color: #444;
+}
+
+.dev-mode-instructions li {
+    margin-bottom: 0.5rem;
 }
