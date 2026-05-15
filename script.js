@@ -3,6 +3,7 @@ const apps = [
     {
         id: 1,
         name: "Relax",
+        category: "Utility",
         description: "A simple breathing meditation app designed for the additive display. Inhale and exhale to the rhythmic animation to center yourself. Specifically optimized for Meta Ray-Ban displays.",
         link: "https://facebook.com/fb_viewapp/web_app_deep_link?appName=Relax&appUrl=https%3A%2F%2Flittlered311.github.io%2Fmeditateonrbmd%2F"
     }
@@ -11,6 +12,7 @@ const apps = [
 // DOM Elements
 const appGrid = document.getElementById('appGrid');
 const searchInput = document.getElementById('searchInput');
+const categoryFilter = document.getElementById('categoryFilter');
 
 const appModal = document.getElementById('appModal');
 const closeAppModal = document.getElementById('closeAppModal');
@@ -22,6 +24,10 @@ const copyBtn = document.getElementById('copyBtn');
 const devModal = document.getElementById('devModal');
 const devCtaBtn = document.getElementById('devCtaBtn');
 const closeDevModal = document.getElementById('closeDevModal');
+
+const welcomeModal = document.getElementById('welcomeModal');
+const closeWelcomeModal = document.getElementById('closeWelcomeModal');
+const getStartedBtn = document.getElementById('getStartedBtn');
 
 // Render Apps
 function renderApps(appsToRender) {
@@ -45,15 +51,22 @@ function renderApps(appsToRender) {
     });
 }
 
-// Search Functionality
-searchInput.addEventListener('input', (e) => {
-    const searchTerm = e.target.value.toLowerCase();
-    const filteredApps = apps.filter(app => 
-        app.name.toLowerCase().includes(searchTerm) || 
-        app.description.toLowerCase().includes(searchTerm)
-    );
+// Search & Filter Functionality
+function filterApps() {
+    const searchTerm = searchInput.value.toLowerCase();
+    const category = categoryFilter.value;
+    
+    const filteredApps = apps.filter(app => {
+        const matchesSearch = app.name.toLowerCase().includes(searchTerm) || app.description.toLowerCase().includes(searchTerm);
+        const matchesCategory = category === 'all' || app.category === category;
+        return matchesSearch && matchesCategory;
+    });
+    
     renderApps(filteredApps);
-});
+}
+
+searchInput.addEventListener('input', filterApps);
+categoryFilter.addEventListener('change', filterApps);
 
 // App Modal Handling
 function openAppModal(app) {
@@ -92,6 +105,29 @@ window.addEventListener('click', (e) => {
         devModal.classList.remove('show');
         document.body.style.overflow = 'auto';
     }
+    if (e.target === welcomeModal) {
+        welcomeModal.classList.remove('show');
+        document.body.style.overflow = 'auto';
+    }
+});
+
+// Welcome Modal Handling
+function checkFirstVisit() {
+    if (!localStorage.getItem('hasVisitedSideEye')) {
+        welcomeModal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+        localStorage.setItem('hasVisitedSideEye', 'true');
+    }
+}
+
+closeWelcomeModal.addEventListener('click', () => {
+    welcomeModal.classList.remove('show');
+    document.body.style.overflow = 'auto';
+});
+
+getStartedBtn.addEventListener('click', () => {
+    welcomeModal.classList.remove('show');
+    document.body.style.overflow = 'auto';
 });
 
 // Copy Button Functionality
@@ -116,5 +152,6 @@ copyBtn.addEventListener('click', () => {
     }
 });
 
-// Initial Render
+// Initial Render & Checks
 renderApps(apps);
+checkFirstVisit();
