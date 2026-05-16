@@ -48,6 +48,7 @@ const closeDevModal = document.getElementById('closeDevModal');
 const welcomeModal = document.getElementById('welcomeModal');
 const closeWelcomeModal = document.getElementById('closeWelcomeModal');
 const getStartedBtn = document.getElementById('getStartedBtn');
+const infoBtn = document.getElementById('infoBtn');
 
 // Render Apps
 function renderApps(appsToRender) {
@@ -96,7 +97,7 @@ function openAppModal(app) {
 
     const videoContainer = document.getElementById('modalVideoContainer');
     if (app.youtubeId) {
-        videoContainer.innerHTML = `<iframe width="100%" height="250" src="https://www.youtube.com/embed/${app.youtubeId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+        videoContainer.innerHTML = `<iframe width="100%" height="250" src="https://www.youtube.com/embed/${app.youtubeId}?autoplay=1&mute=1&controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
     } else {
         videoContainer.innerHTML = `<div class="coming-soon-video">Video Preview Coming Soon</div>`;
     }
@@ -158,6 +159,11 @@ closeWelcomeModal.addEventListener('click', () => {
 getStartedBtn.addEventListener('click', () => {
     welcomeModal.classList.remove('show');
     document.body.style.overflow = 'auto';
+});
+
+infoBtn.addEventListener('click', () => {
+    welcomeModal.classList.add('show');
+    document.body.style.overflow = 'hidden';
 });
 
 // Copy Button Functionality
