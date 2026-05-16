@@ -357,3 +357,47 @@ footer p {
     border: 1px dashed #ccc;
     border-radius: 8px;
 }
+
+.dev-mode-dropdown {
+    margin-top: 1rem;
+    cursor: pointer;
+}
+
+.dev-mode-dropdown summary {
+    font-weight: 600;
+    color: var(--primary-color);
+    outline: none;
+    margin-bottom: 0.5rem;
+}
+
+.dev-mode-dropdown .dropdown-content {
+    margin-top: 0.5rem;
+    padding-left: 0.5rem;
+    border-left: 2px solid var(--border-color);
+}
+
+.info-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s, background-color 0.2s;
+    z-index: 900;
+}
+
+.info-btn:hover {
+    transform: scale(1.1);
+    background-color: #333;
+}
