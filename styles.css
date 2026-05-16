@@ -197,7 +197,9 @@ footer p {
     height: 100%;
     background-color: rgba(0,0,0,0.4);
     backdrop-filter: blur(4px);
-    align-items: center;
+    overflow-y: auto;
+    padding: 2rem 1rem;
+    align-items: flex-start;
     justify-content: center;
     opacity: 0;
     transition: opacity 0.2s;
@@ -212,12 +214,13 @@ footer p {
     background-color: var(--card-bg);
     padding: 2.5rem;
     border-radius: 12px;
-    width: 90%;
-    max-width: 500px;
+    width: 100%;
+    max-width: 680px;
     position: relative;
     box-shadow: 0 20px 40px rgba(0,0,0,0.2);
     transform: translateY(20px);
     transition: transform 0.2s;
+    margin: auto 0;
 }
 
 .modal.show .modal-content {
