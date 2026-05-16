@@ -4,6 +4,8 @@ const apps = [
         id: 1,
         name: "Relax",
         category: "Utility",
+        developer: "Adam Tampio",
+        youtubeId: "",
         description: "A simple breathing meditation app designed for the additive display. Inhale and exhale to the rhythmic animation to center yourself. Specifically optimized for Meta Ray-Ban displays.",
         link: "https://facebook.com/fb_viewapp/web_app_deep_link?appName=Relax&appUrl=https%3A%2F%2Flittlered311.github.io%2Fmeditateonrbmd%2F"
     },
@@ -11,6 +13,8 @@ const apps = [
         id: 2,
         name: "Compass",
         category: "Utility",
+        developer: "Adam Tampio",
+        youtubeId: "",
         description: "Basic, lightweight compass app",
         link: "https://facebook.com/fb_viewapp/web_app_deep_link?appName=Compass&appUrl=https%3A%2F%2Flittlered311.github.io%2FcompassRBMD%2F"
     }
@@ -39,7 +43,7 @@ const getStartedBtn = document.getElementById('getStartedBtn');
 // Render Apps
 function renderApps(appsToRender) {
     appGrid.innerHTML = '';
-    
+
     if (appsToRender.length === 0) {
         appGrid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #666; font-size: 1.1rem; padding: 2rem;">No apps found matching your search.</p>';
         return;
@@ -50,6 +54,7 @@ function renderApps(appsToRender) {
         card.className = 'app-card';
         card.innerHTML = `
             <h3>${app.name}</h3>
+            <div class="dev-badge">by ${app.developer || 'Unknown'}</div>
             <p>${app.description}</p>
             <div class="card-action">View Details &rarr;</div>
         `;
@@ -62,13 +67,13 @@ function renderApps(appsToRender) {
 function filterApps() {
     const searchTerm = searchInput.value.toLowerCase();
     const category = categoryFilter.value;
-    
+
     const filteredApps = apps.filter(app => {
         const matchesSearch = app.name.toLowerCase().includes(searchTerm) || app.description.toLowerCase().includes(searchTerm);
         const matchesCategory = category === 'all' || app.category === category;
         return matchesSearch && matchesCategory;
     });
-    
+
     renderApps(filteredApps);
 }
 
@@ -78,6 +83,15 @@ categoryFilter.addEventListener('change', filterApps);
 // App Modal Handling
 function openAppModal(app) {
     modalAppName.textContent = app.name;
+    document.getElementById('modalAppDeveloper').textContent = `Developer: ${app.developer || 'Unknown'}`;
+    
+    const videoContainer = document.getElementById('modalVideoContainer');
+    if (app.youtubeId) {
+        videoContainer.innerHTML = `<iframe width="100%" height="250" src="https://www.youtube.com/embed/${app.youtubeId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+    } else {
+        videoContainer.innerHTML = `<div class="coming-soon-video">Video Preview Coming Soon</div>`;
+    }
+
     modalAppDesc.textContent = app.description;
     sideloadLink.value = app.link;
     copyBtn.textContent = 'Copy';
@@ -141,7 +155,7 @@ getStartedBtn.addEventListener('click', () => {
 copyBtn.addEventListener('click', () => {
     sideloadLink.select();
     sideloadLink.setSelectionRange(0, 99999); // For mobile devices
-    
+
     try {
         navigator.clipboard.writeText(sideloadLink.value).then(() => {
             copyBtn.textContent = 'Copied!';
