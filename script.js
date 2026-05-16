@@ -17,6 +17,15 @@ const apps = [
         youtubeId: "",
         description: "Basic, lightweight compass app",
         link: "https://facebook.com/fb_viewapp/web_app_deep_link?appName=Compass&appUrl=https%3A%2F%2Flittlered311.github.io%2FcompassRBMD%2F"
+    },
+    {
+        id: 3,
+        name: "argustab",
+        category: "Utility",
+        developer: "u/jose0b - Reddit",
+        youtubeId: "",
+        description: "ArgusTab a Guitar-tab reader for the Meta Ray-Ban Display glasses.<br><br>Reads .gpx, MusicXML, and AlphaTex files<br><br>Live playback with cursor tracking, smooth scroll, configurable tempo, per-bar BPM override, master volume, metronome, count-in<br><br>A/B loop selection — mark a passage and drill it<br><br>Ships with 14 built-in practice exercises in all 12 keys (major scales, major/minor pentatonics, major/minor triad arpeggios, scales in broken 3rds → 10ths, diatonic 7th arpeggios)<br><br>Bring your own tabs via a private remote catalog URL (S3 / Cloudflare R2 / whatever you self-host)<br><br>Learn more: <a href='https://www.reddit.com/r/MetaGlassesforDevs/comments/1teqimv/argustab_a_guitartab_reader_for_the_meta_rayban/' target='_blank' style='color:#0055cc; text-decoration:underline;'>Reddit Post</a>",
+        link: "https://facebook.com/fb_viewapp/web_app_deep_link?appName=argustab&appUrl=https%3A%2F%2Fargustab.awfullynice.app"
     }
 ];
 
@@ -92,7 +101,7 @@ function openAppModal(app) {
         videoContainer.innerHTML = `<div class="coming-soon-video">Video Preview Coming Soon</div>`;
     }
 
-    modalAppDesc.textContent = app.description;
+    modalAppDesc.innerHTML = app.description;
     sideloadLink.value = app.link;
     copyBtn.textContent = 'Copy';
     appModal.classList.add('show');
