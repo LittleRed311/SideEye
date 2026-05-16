@@ -14,7 +14,6 @@
     <header>
         <div class="header-content">
             <h1>Side-Eye</h1>
-            <p>The side-loading app store for Meta Ray-Ban displays</p>
 
             <div class="header-actions">
                 <input type="text" id="searchInput" placeholder="Search apps...">
@@ -94,20 +93,26 @@
                 <h3>Developer Mode Required</h3>
                 <p>If you have Developer Mode enabled, you'll be one tap away from adding the Web App. Otherwise, you'll
                     be asked to enable Developer Mode first.</p>
-                <p><strong>How to enable Developer Mode:</strong></p>
-                <ol>
-                    <li>Open the Meta AI app on your paired iOS or Android device.</li>
-                    <li>Select Settings > App Info, and then tap the App version number five times to display a pop-up
-                        that enables Developer Mode.</li>
-                    <li>Click Enable to confirm.</li>
-                </ol>
-                <p class="help-text">Note: Developer Mode persists across sessions, so you don't need to re-enable it
-                    each time you open the Meta AI app.</p>
+                <details class="dev-mode-dropdown">
+                    <summary><strong>How to enable Developer Mode</strong></summary>
+                    <div class="dropdown-content">
+                        <ol>
+                            <li>Open the Meta AI app on your paired iOS or Android device.</li>
+                            <li>Select Settings > App Info, and then tap the App version number five times to display a pop-up
+                                that enables Developer Mode.</li>
+                            <li>Click Enable to confirm.</li>
+                        </ol>
+                        <p class="help-text">Note: Developer Mode persists across sessions, so you don't need to re-enable it
+                            each time you open the Meta AI app.</p>
+                    </div>
+                </details>
             </div>
             <button id="getStartedBtn" class="btn primary-btn" style="margin-top: 1.5rem; width: 100%;">Got it, let's
                 go!</button>
         </div>
     </div>
+
+    <button id="infoBtn" class="info-btn" title="About Side-Eye">?</button>
 
     <script src="script.js"></script>
 </body>
