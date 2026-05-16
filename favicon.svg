@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+    <defs>
+        <linearGradient id="purpleGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#d946ef" stop-opacity="0.85" />
+            <stop offset="100%" stop-color="#7e22ce" stop-opacity="0.4" />
+        </linearGradient>
+    </defs>
+    
+    <!-- Sleek Dark Background -->
+    <rect width="120" height="120" rx="28" fill="#0a0a0a" />
+    
+    <!-- Arm of glasses extending out to the right edge -->
+    <path d="M 104 38 L 125 38" fill="none" stroke="#ddd" stroke-width="8" stroke-linecap="round" />
+    
+    <!-- Right Lens Frame (Thick, refined, Wayfarer-like curve) -->
+    <path d="M 104 38 C 90 32, 45 32, 32 45 C 25 52, 28 68, 42 82 C 55 95, 95 90, 108 68 C 112 58, 108 40, 104 38 Z" fill="#151515" stroke="#fff" stroke-width="7" stroke-linejoin="round" />
+    
+    <!-- Bridge extending to the left edge -->
+    <path d="M 34 46 Q 15 42 -5 46" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" />
+    
+    <!-- Subtle Eyeball (Sleek and minimal) -->
+    <path d="M 45 60 Q 68 45 90 60 Q 68 75 45 60 Z" fill="none" stroke="#444" stroke-width="2.5" />
+    
+    <!-- Pupil (Looking far right for the "side-eye") -->
+    <circle cx="78" cy="60" r="7" fill="#888" />
+    
+    <!-- Purple Display Light (Square HUD overlay over the eye) -->
+    <!-- Positioned directly over the pupil to represent the additive display -->
+    <rect x="66" y="48" width="24" height="24" rx="4" fill="url(#purpleGlow)" stroke="#e879f9" stroke-width="1.5" />
+    
+    <!-- Small tech detail/reflection on the display -->
+    <path d="M 69 51 L 76 51" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity="0.8" />
+    <path d="M 69 55 L 73 55" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity="0.6" />
+</svg>
