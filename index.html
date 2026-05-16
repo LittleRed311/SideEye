@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SideEye - Meta Ray-Ban Web Apps</title>
+    <title>Side-Eye - Meta Ray-Ban Web Apps</title>
     <meta name="description" content="The unofficial app store for Meta Ray-Ban displays. Sideload web apps easily.">
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <header>
         <div class="header-content">
-            <h1>SideEye</h1>
-            <p>The unofficial app store for Meta Ray-Ban displays</p>
-            
+            <h1>Side-Eye</h1>
+            <p>The side-loading app store for Meta Ray-Ban displays</p>
+
             <div class="header-actions">
                 <input type="text" id="searchInput" placeholder="Search apps...">
                 <select id="categoryFilter" class="filter-select">
@@ -33,9 +35,11 @@
     <footer>
         <p>Created an app? We'd love to feature it.</p>
         <div class="footer-actions" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-            <a href="mailto:actampio@gmail.com?subject=New%20App%20Submission%20for%20SideEye&body=The%20App%20Name%3A%0ADescription%3A%0AShare%20Link%3A%0ACategory%20%28Games%2FUtility%29%3A%0ADeveloper%20Name%3A%0AYouTube%20Link%20%28optional%29%3A" class="btn">Email to Submit App</a>
+            <a href="mailto:actampio@gmail.com?subject=New%20App%20Submission%20for%20SideEye&body=The%20App%20Name%3A%0ADescription%3A%0AShare%20Link%3A%0ACategory%20%28Games%2FUtility%29%3A%0ADeveloper%20Name%3A%0AYouTube%20Link%20%28optional%29%3A"
+                class="btn">Email to Submit App</a>
             <button id="devCtaBtn" class="btn primary-btn">Develop for Ray-Bans</button>
-            <a href="https://www.reddit.com/r/MetaGlassesforDevs/" target="_blank" class="btn" style="background-color: #ff4500; color: white; border-color: #ff4500;">r/MetaGlassesforDevs</a>
+            <a href="https://www.reddit.com/r/MetaGlassesforDevs/" target="_blank" class="btn"
+                style="background-color: #ff4500; color: white; border-color: #ff4500;">r/MetaGlassesforDevs</a>
         </div>
     </footer>
 
@@ -45,7 +49,7 @@
             <span class="close-btn" id="closeAppModal">&times;</span>
             <h2 id="modalAppName">App Name</h2>
             <div id="modalAppDeveloper" class="developer-tag"></div>
-            
+
             <div id="modalVideoContainer" class="video-container">
                 <!-- Video or coming soon placeholder -->
             </div>
@@ -57,7 +61,7 @@
                     <input type="text" id="sideloadLink" readonly>
                     <button id="copyBtn" class="btn">Copy</button>
                 </div>
-                <p class="help-text">Copy this link and send it to your glasses to sideload.</p>
+                <p class="help-text">Copy this link and open it on your phone to sideload.</p>
             </div>
         </div>
     </div>
@@ -67,9 +71,11 @@
         <div class="modal-content">
             <span class="close-btn" id="closeDevModal">&times;</span>
             <h2>Develop Your Own Apps</h2>
-            <p>Meta Ray-Bans support lightweight web applications tailored for the glasses' unique display and interaction model.</p>
+            <p>Meta Ray-Bans support lightweight web applications tailored for the glasses' unique display and
+                interaction model.</p>
             <p>Want to build your own? Check out the official Meta developer documentation:</p>
-            <a href="https://wearables.developer.meta.com/docs/develop/webapps/" target="_blank" class="meta-link">Meta Web Apps Documentation &rarr;</a>
+            <a href="https://wearables.developer.meta.com/docs/develop/webapps/" target="_blank" class="meta-link">Meta
+                Web Apps Documentation &rarr;</a>
             <p>Once you've built something cool, submit it to us using the email link at the bottom of the page!</p>
         </div>
     </div>
@@ -78,24 +84,31 @@
     <div id="welcomeModal" class="modal">
         <div class="modal-content welcome-content">
             <span class="close-btn" id="closeWelcomeModal">&times;</span>
-            <h2>Welcome to SideEye!</h2>
-            <p><strong>SideEye</strong> is the unofficial app store to sideload web apps onto your Meta Ray-Ban Displays.</p>
-            <p>When you copy an app's link from this site and send it to your phone, you can instantly access the app on your glasses.</p>
+            <h2>Welcome to Side-Eye!</h2>
+            <p><strong>SideEye</strong> is the unofficial app store to sideload web apps onto your Meta Ray-Ban
+                Displays.</p>
+            <p>When you copy an app's link from this site and send it to your phone, you can instantly access the app on
+                your glasses.</p>
             <div class="dev-mode-instructions">
                 <h3>Developer Mode Required</h3>
-                <p>If you have Developer Mode enabled, you'll be one tap away from adding the Web App. Otherwise, you'll be asked to enable Developer Mode first.</p>
+                <p>If you have Developer Mode enabled, you'll be one tap away from adding the Web App. Otherwise, you'll
+                    be asked to enable Developer Mode first.</p>
                 <p><strong>How to enable Developer Mode:</strong></p>
                 <ol>
                     <li>Open the Meta AI app on your paired iOS or Android device.</li>
-                    <li>Select Settings > App Info, and then tap the App version number five times to display a pop-up that enables Developer Mode.</li>
+                    <li>Select Settings > App Info, and then tap the App version number five times to display a pop-up
+                        that enables Developer Mode.</li>
                     <li>Click Enable to confirm.</li>
                 </ol>
-                <p class="help-text">Note: Developer Mode persists across sessions, so you don't need to re-enable it each time you open the Meta AI app.</p>
+                <p class="help-text">Note: Developer Mode persists across sessions, so you don't need to re-enable it
+                    each time you open the Meta AI app.</p>
             </div>
-            <button id="getStartedBtn" class="btn primary-btn" style="margin-top: 1.5rem; width: 100%;">Got it, let's go!</button>
+            <button id="getStartedBtn" class="btn primary-btn" style="margin-top: 1.5rem; width: 100%;">Got it, let's
+                go!</button>
         </div>
     </div>
 
     <script src="script.js"></script>
 </body>
+
 </html>
