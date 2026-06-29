@@ -1,0 +1,210 @@
+/* Reset & Base Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    color: #000000;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+/* Hero Section */
+.hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100dvh;
+    width: 100%;
+    position: relative;
+    padding: 0 2rem;
+    box-sizing: border-box;
+}
+
+.brand-text {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1300px;
+    font-size: 7.2vw;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    user-select: none;
+}
+
+.pair {
+    display: inline-block;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
+}
+
+.pair:hover {
+    transform: scale(1.08);
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.7rem;
+    font-weight: 900;
+    letter-spacing: 0.25em;
+    color: #000000;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    animation: bounce 2s infinite;
+}
+
+.scroll-indicator:hover {
+    opacity: 1;
+    transform: translateY(2px);
+}
+
+.scroll-indicator svg {
+    margin-top: 0.25rem;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-6px);
+    }
+    60% {
+        transform: translateY(-3px);
+    }
+}
+
+/* Climb Section */
+.climb-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100dvh;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 2rem;
+    border-top: 1px solid #f2f2f2;
+}
+
+.climb-card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 440px;
+    padding: 2.5rem;
+    background-color: #ffffff;
+    border: 2px solid #000000;
+    text-decoration: none;
+    color: #000000;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+}
+
+.climb-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.05);
+}
+
+.climb-header {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    margin-bottom: 1.25rem;
+}
+
+.climb-logo {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #bbdefb;
+    border: 1.5px solid #000000;
+    overflow: hidden;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.climb-card:hover .climb-logo {
+    transform: rotate(90deg);
+}
+
+.climb-logo svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.climb-title {
+    font-size: 1.75rem;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+}
+
+.climb-caption {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: #555555;
+    line-height: 1.5;
+    margin-bottom: 2rem;
+}
+
+.climb-action {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border-top: 1.5px solid #f2f2f2;
+    padding-top: 1.25rem;
+    color: #000000;
+}
+
+.climb-action svg {
+    transition: transform 0.3s ease;
+}
+
+.climb-card:hover .climb-action svg {
+    transform: translateX(4px);
+}
+
+/* Responsive / Mobile Style */
+@media (max-width: 767px) {
+    .brand-text {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1.5vh;
+        font-size: 11vh;
+        padding: 0;
+    }
+
+    .pair:hover {
+        transform: none; /* Disable hover scale on mobile */
+    }
+
+    .scroll-indicator {
+        bottom: 1.5rem;
+    }
+
+    .climb-card {
+        padding: 2rem;
+    }
+}
