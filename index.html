@@ -1,70 +1,703 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Side-Eye</title>
-    <meta name="description" content="WE MAKE MISTAKES. We make webapps for the Meta Ray-Ban displays.">
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Climb: The World's Leaderboard</title>
+  <!-- SVG Favicon -->
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22&gt;&lt;rect width=%2216%22 height=%2216%22 fill=%22%23bbdefb%22/&gt;&lt;path d=%22M7 4h2v2H7zm-1 2h4v2H6zm-1 2h6v2H5zm-1 2h8v2H4zm-1 2h10v2H3z%22 fill=%22%23ffffff%22/&gt;&lt;/svg&gt;">
+
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="main-table">
-        <tr>
-            <td>
-                <!-- Header line -->
-                <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                    <tr>
-                        <td class="header-cell">
-                            <b>Side-Eye</b>
-                        </td>
-                    </tr>
-                </table>
-                <hr size="1" color="#cccccc" class="header-divider">
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <!-- Page Layout -->
-                <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                    <tr valign="top">
-                        <!-- Sidebar Links -->
-                        <td width="120" class="sidebar">
-                            <table border="0" cellpadding="2" cellspacing="0">
-                                <tr><td><a href="index.html">Home</a></td></tr>
-                                <tr><td><a href="https://climb.side-eye.xyz" target="_blank" rel="noopener noreferrer">Climb</a></td></tr>
-                                <tr><td><a href="mailto:anything@vexaiulkoo.resend.app">Contact</a></td></tr>
-                            </table>
-                        </td>
-                        <!-- Vertical spacer -->
-                        <td width="30"></td>
-                        <!-- Main Content -->
-                        <td class="content-cell">
-                            <h1>WE MAKE MISTAKES.</h1>
-                            
-                            <p>We make webapps for the Meta Ray-Ban displays.</p>
-                            
-                            <p>Our focus is building lightweight, glanceable interfaces and simple web experiences optimized for smart glasses and heads-up displays.</p>
-                            
-                            <p>
-                                <b>Projects:</b>
-                            </p>
-                            <ul>
-                                <li>
-                                    <a href="https://climb.side-eye.xyz" target="_blank" rel="noopener noreferrer"><b>Climb</b></a> - Step up and make your way to the top.
-                                </li>
-                            </ul>
-                            
-                            <p>
-                                <b>Contact:</b>
-                            </p>
-                            <p>
-                                Email us at <a href="mailto:anything@vexaiulkoo.resend.app">anything@vexaiulkoo.resend.app</a>.
-                            </p>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </table>
+  <div id="app" class="app-container">
+
+    <!-- Screen: Loader (Shown during initialization checks) -->
+    <section id="screen-loader" class="screen active">
+      <div class="loader-content">
+        <div class="logo-spinner"></div>
+        <h1 class="brand-title animated">Climb</h1>
+        <p class="loader-text">Loading...</p>
+      </div>
+    </section>
+
+    <!-- Screen: Authentication -->
+    <section id="screen-auth" class="screen">
+      <div class="card auth-card">
+        <h1 class="brand-title">Climb</h1>
+        <p class="brand-subtitle">Step up and make your way to the top.</p>
+
+        <!-- Step 0: Welcome Screen -->
+        <div id="auth-step-welcome">
+          <div class="mash-arena">
+            <button type="button" class="mash-card" id="btn-welcome-create" style="background: var(--bg-secondary); padding: 0; text-align: inherit; width: 100%;">
+              <div class="image-wrapper" style="display: flex; align-items: center; justify-content: center; color: var(--accent-color);">
+                <svg class="retro-icon" viewBox="0 0 16 16" width="48" height="48" fill="currentColor">
+                  <path d="M7 1h2v2H7zm-1 2h4v2H6zm-1 2h6v2H5zm-1 2h8v2H4zm-1 2h10v2H3zm-1 2h12v2H2zm-1 2h14v2H1z" />
+                </svg>
+              </div>
+              <div class="mash-card-info">
+                <span class="profile-elo-tag" style="font-size: 1rem; padding: 4px 12px;">Sign Up</span>
+              </div>
+            </button>
+            <div class="mash-vs">or</div>
+            <button type="button" class="mash-card" id="btn-welcome-signin" style="background: var(--bg-secondary); padding: 0; text-align: inherit; width: 100%;">
+              <div class="image-wrapper" style="display: flex; align-items: center; justify-content: center; color: var(--accent-color);">
+                <svg class="retro-icon" viewBox="0 0 16 16" width="48" height="48" fill="currentColor">
+                  <path d="M6 1h4v4H6zm-2 5h8v2H4zm-1 2h10v8H3z" />
+                </svg>
+              </div>
+              <div class="mash-card-info">
+                <span class="profile-elo-tag" style="font-size: 1rem; padding: 4px 12px;">Log In</span>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 1: Email Entry -->
+        <div id="auth-step-email" class="hidden">
+          <form id="form-email">
+            <div class="input-group">
+              <label for="input-email" id="label-email-title">Email Address</label>
+              <input type="email" id="input-email" placeholder="you@example.com" required autocomplete="email">
+              <p class="input-hint">Enter your email to receive a secure link.</p>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block" id="btn-send-otp">
+              Send Link
+            </button>
+            <button type="button" class="btn btn-text btn-block" id="btn-back-welcome" style="margin-top: 10px;">
+              Go Back
+            </button>
+          </form>
+        </div>
+
+        <!-- Step 2: Magic Link Success Message (Hidden by default) -->
+        <div id="auth-step-success" class="hidden text-center" style="padding: 10px 0;">
+          <div style="display: flex; justify-content: center; margin-bottom: 16px; color: var(--primary-color);">
+            <svg class="retro-icon" viewBox="0 0 16 16" width="56" height="56" fill="currentColor">
+              <path d="M1 2h14v12H1zm2 2v2l5 4 5-4V4zm0 4v4h10V8L8 10z" />
+            </svg>
+          </div>
+          <h3 class="section-title" style="text-align: center;">Check Your Email</h3>
+          <p class="section-desc" style="text-align: center; margin-bottom: 12px;">We sent a secure login link to your
+            email. Open the link to sign in.</p>
+          <p class="input-hint"
+            style="text-align: center; margin-bottom: 24px; color: var(--primary-color); font-weight: 500;">Check spam
+            folder if needed!</p>
+          <button type="button" class="btn btn-secondary btn-block" id="btn-back-email">
+            Go Back
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Screen: Register / Profile Completion -->
+    <section id="screen-register" class="screen">
+      <div class="card register-card">
+        <form id="form-register">
+
+          <!-- Step 1: Name -->
+          <div id="reg-step-1" class="wizard-step wizard-active">
+            <h2 class="section-title" style="text-align: center;">What's your name?</h2>
+            <p class="section-desc" style="text-align: center;">This is how others will see you on Climb.</p>
+            <div class="input-group">
+              <label for="input-first-name">First Name</label>
+              <input type="text" id="input-first-name" placeholder="Your first name" required>
+              <p class="input-hint" style="color: var(--text-main); font-weight: 500; margin-top: 6px;">Your first name will be public.</p>
+            </div>
+            <button type="button" class="btn btn-primary btn-block" id="btn-next-step-1">Next</button>
+          </div>
+
+          <!-- Step 2: Region -->
+          <div id="reg-step-2" class="wizard-step hidden">
+            <h2 class="section-title" style="text-align: center;">Where are you?</h2>
+            <p class="section-desc" style="text-align: center;">Select your region to compete on the Region leaderboard.</p>
+            <div class="input-group">
+              <label for="select-state">Region</label>
+              <div class="combobox-container" id="combobox-reg-region">
+                <input type="text" class="combobox-input" id="input-state-search" placeholder="Type to search city..." autocomplete="off">
+                <input type="hidden" id="select-state" required>
+                <div class="combobox-dropdown hidden">
+                  <div class="combobox-options" id="options-reg-region"></div>
+                </div>
+              </div>
+            </div>
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+              <button type="button" class="btn btn-secondary" style="flex: 1;" id="btn-prev-step-2">Back</button>
+              <button type="button" class="btn btn-primary" style="flex: 2;" id="btn-next-step-2">Next</button>
+            </div>
+          </div>
+
+          <!-- Step 3: Gender Selection -->
+          <div id="reg-step-3" class="wizard-step hidden">
+            <h2 class="section-title" style="text-align: center;">Are you a:</h2>
+            <p class="input-hint" style="text-align: center; color: #ffaa00; font-weight: 500; margin-bottom: 20px;">This cannot be changed later.</p>
+            <input type="hidden" id="select-gender" value="">
+            <div class="mash-arena">
+              <button type="button" class="mash-card gender-vote-box" data-value="male" id="gender-box-male" style="background: var(--bg-secondary); padding: 0; text-align: inherit; width: 100%;">
+                <div class="image-wrapper" style="display: flex; align-items: center; justify-content: center; color: var(--accent-color);">
+                  <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="miter">
+                    <circle cx="10" cy="14" r="7"/>
+                    <line x1="15" y1="9" x2="22" y2="2"/>
+                    <line x1="17" y1="2" x2="22" y2="2"/>
+                    <line x1="22" y1="2" x2="22" y2="7"/>
+                  </svg>
+                </div>
+                <div class="mash-card-info">
+                  <span class="profile-elo-tag" style="font-size: 1rem; padding: 4px 12px;">Boy</span>
+                </div>
+              </button>
+              <div class="mash-vs">or</div>
+              <button type="button" class="mash-card gender-vote-box" data-value="female" id="gender-box-female" style="background: var(--bg-secondary); padding: 0; text-align: inherit; width: 100%;">
+                <div class="image-wrapper" style="display: flex; align-items: center; justify-content: center; color: var(--accent-color);">
+                  <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="miter">
+                    <circle cx="12" cy="9" r="7"/>
+                    <line x1="12" y1="16" x2="12" y2="23"/>
+                    <line x1="9" y1="20" x2="15" y2="20"/>
+                  </svg>
+                </div>
+                <div class="mash-card-info">
+                  <span class="profile-elo-tag" style="font-size: 1rem; padding: 4px 12px;">Girl</span>
+                </div>
+              </button>
+            </div>
+            <div style="display: flex; gap: 10px; margin-top: 24px;">
+              <button type="button" class="btn btn-secondary" style="flex: 1;" id="btn-prev-step-3">Back</button>
+              <button type="button" class="btn btn-primary" style="flex: 2;" id="btn-next-step-3" disabled>Next</button>
+            </div>
+          </div>
+
+          <!-- Step 4: Vote Preference -->
+          <div id="reg-step-4" class="wizard-step hidden">
+            <h2 class="section-title" style="text-align: center;">Do you want to vote on:</h2>
+            <p class="section-desc" style="text-align: center;">You can change this later in Settings.</p>
+            <input type="hidden" id="select-vote-pref" value="">
+            <div class="mash-arena">
+              <button type="button" class="mash-card vote-pref-box" data-value="male" id="vote-box-male" style="background: var(--bg-secondary); padding: 0; text-align: inherit; width: 100%;">
+                <div class="image-wrapper" style="display: flex; align-items: center; justify-content: center; color: var(--accent-color);">
+                  <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="miter">
+                    <circle cx="10" cy="14" r="7"/>
+                    <line x1="15" y1="9" x2="22" y2="2"/>
+                    <line x1="17" y1="2" x2="22" y2="2"/>
+                    <line x1="22" y1="2" x2="22" y2="7"/>
+                  </svg>
+                </div>
+                <div class="mash-card-info">
+                  <span class="profile-elo-tag" style="font-size: 1rem; padding: 4px 12px;">Boys</span>
+                </div>
+              </button>
+              <div class="mash-vs">or</div>
+              <button type="button" class="mash-card vote-pref-box" data-value="female" id="vote-box-female" style="background: var(--bg-secondary); padding: 0; text-align: inherit; width: 100%;">
+                <div class="image-wrapper" style="display: flex; align-items: center; justify-content: center; color: var(--accent-color);">
+                  <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="miter">
+                    <circle cx="12" cy="9" r="7"/>
+                    <line x1="12" y1="16" x2="12" y2="23"/>
+                    <line x1="9" y1="20" x2="15" y2="20"/>
+                  </svg>
+                </div>
+                <div class="mash-card-info">
+                  <span class="profile-elo-tag" style="font-size: 1rem; padding: 4px 12px;">Girls</span>
+                </div>
+              </button>
+            </div>
+            <div style="display: flex; gap: 10px; margin-top: 24px;">
+              <button type="button" class="btn btn-secondary" style="flex: 1;" id="btn-prev-step-4">Back</button>
+              <button type="button" class="btn btn-primary" style="flex: 2;" id="btn-next-step-4" disabled>Next</button>
+            </div>
+          </div>
+
+          <!-- Step 5: Photo Upload + Submit -->
+          <div id="reg-step-5" class="wizard-step hidden">
+            <h2 class="section-title" style="text-align: center;">Add a Photo</h2>
+            <p class="section-desc" style="text-align: center;">Upload a photo of yourself to start climbing.</p>
+            <div class="image-upload-container" style="text-align: center;">
+              <div class="avatar-preview-wrapper"
+                style="margin: 0 auto 15px; width: 150px; height: 150px; border-radius: var(--radius-md); overflow: hidden; border: 2px dashed var(--border-color); display: flex; justify-content: center; align-items: center; position: relative; background-color: var(--bg-secondary);">
+                <img id="avatar-preview-img" src="" alt="Avatar Preview" class="hidden"
+                  style="width: 100%; height: 100%; object-fit: cover;">
+                <div id="avatar-preview-placeholder" style="color: var(--primary-color);">
+                  <svg class="retro-icon" viewBox="0 0 16 16" width="36" height="36" fill="currentColor">
+                    <path
+                      d="M4 3h2v1h4V3h2v2h3v10H1V5h3zm1 4v6h6V7H5zm2 1.5A1.5 1.5 0 1 1 8.5 10 1.5 1.5 0 0 1 7 8.5z" />
+                  </svg>
+                </div>
+              </div>
+              <input type="file" id="input-avatar" accept="image/*" class="hidden">
+              <label for="input-avatar" class="btn btn-secondary btn-sm"
+                style="display: inline-block; margin-bottom: 10px;">Choose Photo</label>
+              <p class="input-hint">Your photo will be cropped and compressed.</p>
+              <p class="input-hint" style="color: var(--text-main); font-weight: 500; margin-top: 6px;">This photo will
+                be public.</p>
+            </div>
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+              <button type="button" class="btn btn-secondary" style="flex: 1;" id="btn-prev-step-5">Back</button>
+              <button type="submit" class="btn btn-primary" style="flex: 2;" id="btn-submit-registration" disabled>Start
+                Climbing</button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </section>
+
+    <!-- Screen: Mash (The voting arena) -->
+    <section id="screen-mash" class="screen">
+      <header class="app-header"
+        style="display: flex; justify-content: center; align-items: center; padding-bottom: 0;">
+        <div class="tabs" style="margin-bottom: 0;">
+          <button class="tab-btn active" id="btn-climb-global" style="padding: 8px 16px;">Global</button>
+          <button class="tab-btn" id="btn-climb-club" style="padding: 8px 16px;">Club</button>
+        </div>
+      </header>
+
+      <div class="mash-arena">
+        <!-- Card 1 -->
+        <div class="mash-card" id="card-left">
+          <div class="image-wrapper">
+            <img id="img-left" src="" alt="Option Left">
+            <div class="card-loader">
+              <div class="spinner"></div>
+            </div>
+            <div class="card-error hidden">
+              <svg class="retro-icon" viewBox="0 0 16 16" width="32" height="32" fill="currentColor">
+                <path d="M2 2h12v12H2zm2 2v3l3-2 2 2 3-3v8H4z" />
+              </svg>
+              <span>Image failed</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mash-vs">or</div>
+
+        <!-- Card 2 -->
+        <div class="mash-card" id="card-right">
+          <div class="image-wrapper">
+            <img id="img-right" src="" alt="Option Right">
+            <div class="card-loader">
+              <div class="spinner"></div>
+            </div>
+            <div class="card-error hidden">
+              <svg class="retro-icon" viewBox="0 0 16 16" width="32" height="32" fill="currentColor">
+                <path d="M2 2h12v12H2zm2 2v3l3-2 2 2 3-3v8H4z" />
+              </svg>
+              <span>Image failed</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- No Matchups View (outside arena so it's not hidden with it) -->
+      <div id="view-no-matchups" class="hidden" style="padding: 20px; text-align: center; width: 100%; flex: 1; display: flex; align-items: center; justify-content: center;">
+        <div class="card"
+          style="padding: 40px 20px; margin: 20px auto; max-width: 400px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px;">
+          <div style="color: var(--accent-color); display: flex; justify-content: center;">
+            <svg class="retro-icon" viewBox="0 0 16 16" width="56" height="56" fill="currentColor">
+              <path d="M7 1h2v2H7zM6 3h4v2H6zM5 5h6v2H5zM4 7h8v2H4zM3 9h10v7H9v-4H7v4H3z" />
+            </svg>
+          </div>
+          <h3 style="font-family: var(--font-display); font-weight: 700; margin-bottom: 0;">No Matchups</h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0; line-height: 1.4;">To start voting,
+            invite more friends to join Climb and upload their photos!</p>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Screen: Leaderboard -->
+    <section id="screen-leaderboard" class="screen">
+      <header class="app-header">
+        <h1 class="brand-title-sm">Summit</h1>
+        <p class="header-desc">Rankings update every hour</p>
+      </header>
+
+      <!-- Tabs -->
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="global">Global</button>
+        <button class="tab-btn" data-tab="state">Region</button>
+        <button class="tab-btn" data-tab="club">Club</button>
+      </div>
+
+      <!-- Leaderboard List -->
+      <div class="leaderboard-container">
+        <div id="leaderboard-list" class="leaderboard-list">
+          <!-- Dynamically populated rows -->
+        </div>
+      </div>
+
+      <!-- Sticky User Stats Row -->
+      <div id="user-sticky-rank" class="sticky-rank-row hidden">
+        <div class="rank-badge user-rank">--</div>
+        <img class="rank-avatar" id="sticky-user-avatar" src="" alt="My Avatar">
+        <div class="rank-info">
+          <div class="rank-name">You (My Position)</div>
+          <div class="rank-meta" id="sticky-user-location">--</div>
+        </div>
+        <div class="rank-elo" id="sticky-user-elo">Grade --</div>
+      </div>
+
+    </section>
+
+    <!-- Screen: Profile / Me -->
+    <section id="screen-profile" class="screen">
+      <div class="profile-card card" style="margin-top: 20px;">
+        <div class="profile-header-info">
+          <div class="profile-avatar-wrapper">
+            <img id="profile-avatar" src="" alt="My Photo" class="profile-large-avatar">
+          </div>
+          <h3 id="profile-email-display">--</h3>
+          <p id="profile-location-display" class="input-hint">Region: --</p>
+          <button id="btn-settings" class="btn btn-secondary btn-sm"
+            style="margin-top: 10px; width: auto; padding: 6px 16px; display: inline-flex; align-items: center; gap: 6px;"><svg
+              class="retro-icon" viewBox="0 0 16 16" width="12" height="12" fill="currentColor">
+              <path
+                d="M7 1h2v2H7zm4 1.5l1.5 1.5-1.5 1.5-1.5-1.5zm2.5 4.5v2h-2V7zM11 11.5l1.5 1.5-1.5 1.5-1.5-1.5zM7 13h2v2H7zM3.5 11l-1.5 1.5 1.5 1.5 1.5-1.5zm-2.5-4h2v2H1zm2.5-3.5L2 5l1.5 1.5 1.5-1.5zm2.5 2.5h4v4H6z" />
+            </svg>Settings</button>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-box">
+            <span class="stat-value" id="stat-elo">--</span>
+            <span class="stat-label">Grade</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-value" id="stat-votes">0</span>
+            <span class="stat-label">Votes Cast</span>
+          </div>
+        </div>
+
+        <div class="ranks-section">
+          <h3>Your Rankings</h3>
+          <div class="rank-item">
+            <span class="rank-item-label" style="display: inline-flex; align-items: center; gap: 6px;"><svg
+                class="retro-icon" viewBox="0 0 16 16" width="14" height="14" fill="currentColor">
+                <path d="M6 1h4v1H6zm-2 1h8v1H4zm-2 2h12v1H2zm-1 2h14v4H1zm1 4h12v1H2zm2 1h8v1H4zm2 1h4v1H6z" />
+              </svg> Global Rank</span>
+            <span class="rank-item-val" id="rank-val-global">--</span>
+          </div>
+          <div class="rank-item">
+            <span class="rank-item-label" style="display: inline-flex; align-items: center; gap: 6px;"><svg
+                class="retro-icon" viewBox="0 0 16 16" width="14" height="14" fill="currentColor">
+                <path d="M6 1h4v2H6zm-2 2h8v2H4zm-1 2h10v2H3zm0 2h10v2H3zm1 2h8v2H4zm2 2h4v2H6zm1 2h2v1H7z" />
+              </svg> Region Rank</span>
+            <span class="rank-item-val" id="rank-val-state">--</span>
+          </div>
+          <div class="rank-item">
+            <span class="rank-item-label" style="display: inline-flex; align-items: center; gap: 6px;"><svg
+                class="retro-icon" viewBox="0 0 16 16" width="14" height="14" fill="currentColor">
+                <path d="M7 1h2v2H7zM6 3h4v2H6zM5 5h6v2H5zM4 7h8v2H4zM3 9h10v7H9v-4H7v4H3z" />
+              </svg> Club Rank</span>
+            <span class="rank-item-val" id="rank-val-club">--</span>
+          </div>
+        </div>
+
+        <div style="padding: 10px 20px 20px 20px;">
+          <button class="btn btn-primary btn-block" id="btn-share-profile"
+            style="display: flex; gap: 8px; justify-content: center; align-items: center;">
+            <svg class="retro-icon" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+              <path
+                d="M11 1a2 2 0 0 0-2 2c0 .113.015.222.04.327L4.76 5.867a2 2 0 1 0 0 4.266l4.28 2.54A2.015 2.015 0 1 0 11 11a2 2 0 0 0-1.28-.466l-4.28-2.54a2.008 2.008 0 0 0 0-.987l4.28-2.54A2 2 0 1 0 11 1z" />
+            </svg>
+            Share Profile
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Screen: Challenges -->
+    <section id="screen-challenges" class="screen">
+      <header class="app-header">
+        <h1 class="brand-title-sm">Challenges</h1>
+        <p class="header-desc">Exclusive opportunities for top climbers</p>
+      </header>
+
+      <div class="challenges-coming-soon">
+        <div class="challenges-icon" style="color: var(--primary-color);">
+          <svg class="retro-icon" viewBox="0 0 16 16" width="48" height="48" fill="currentColor">
+            <path d="M1 2h14v12H1zm2 2v2h2V4zm4 0v2h2V4zm4 0v2h2V4zM3 8v4h10V8H3z" />
+          </svg>
+        </div>
+        <h2 class="challenges-title">Coming Soon</h2>
+        <p class="challenges-desc">The top 99 climbers in each region will be eligible for exclusive casting calls and
+          modeling opportunities in their area.</p>
+        <div class="challenges-features">
+          <div class="challenge-feature">
+            <span class="feature-icon" style="color: var(--primary-color);">
+              <svg class="retro-icon" viewBox="0 0 16 16" width="20" height="20" fill="currentColor">
+                <path d="M4 3h2v1h4V3h2v2h3v10H1V5h3zm1 4v6h6V7H5zm2 1.5A1.5 1.5 0 1 1 8.5 10 1.5 1.5 0 0 1 7 8.5z" />
+              </svg>
+            </span>
+            <span class="feature-text">Modeling Opportunities</span>
+          </div>
+          <div class="challenge-feature">
+            <span class="feature-icon" style="color: var(--primary-color);">
+              <svg class="retro-icon" viewBox="0 0 16 16" width="20" height="20" fill="currentColor">
+                <path d="M1 3h9v10H1zm11 2l3-3v12l-3-3V5z" />
+              </svg>
+            </span>
+            <span class="feature-text">Casting Calls</span>
+          </div>
+          <div class="challenge-feature">
+            <span class="feature-icon" style="color: var(--primary-color);">
+              <svg class="retro-icon" viewBox="0 0 16 16" width="20" height="20" fill="currentColor">
+                <path d="M6 1h4v2H6zm-2 2h8v2H4zm-1 2h10v2H3zm0 2h10v2H3zm1 2h8v2H4zm2 2h4v2H6zm1 2h2v1H7z" />
+              </svg>
+            </span>
+            <span class="feature-text">Region-Based Matching</span>
+          </div>
+        </div>
+        <p class="challenges-footer">Keep climbing to secure your spot in the top 99!</p>
+      </div>
+    </section>
+
+    <!-- Screen: Clubs -->
+    <section id="screen-clubs" class="screen">
+      <header class="app-header">
+        <h1 class="brand-title-sm">Clubs</h1>
+        <p class="header-desc">Climb with your friends, school, or work.</p>
+      </header>
+
+      <!-- No Club View -->
+      <div id="view-no-club" style="display: none; flex-direction: column; gap: 20px; padding: 20px;">
+
+        <div class="card" style="padding: 24px; text-align: center;">
+          <h3 style="margin-bottom: 15px; font-family: var(--font-display);">Join a Club</h3>
+          <div class="input-group" style="margin-bottom: 15px;">
+            <input type="text" id="input-join-club-code" placeholder="Invite Code" maxlength="6"
+              style="text-align: center; font-size: 1.2rem; letter-spacing: 2px; text-transform: uppercase;">
+          </div>
+          <button class="btn btn-primary btn-block" id="btn-join-club">Join Club</button>
+        </div>
+
+        <div style="text-align: center; color: var(--text-muted); font-weight: 600; font-size: 0.9rem;">— OR —</div>
+
+        <div class="card" style="padding: 24px; text-align: center;">
+          <h3 style="margin-bottom: 15px; font-family: var(--font-display);">Create a Club</h3>
+          <p class="input-hint" style="margin-bottom: 15px;">You can only create one club.</p>
+          <div class="input-group" style="margin-bottom: 15px;">
+            <input type="text" id="input-create-club-name" placeholder="Club Name (e.g., UMich 2026)" maxlength="30">
+          </div>
+          <button class="btn btn-secondary btn-block" id="btn-create-club">Create Club</button>
+        </div>
+
+      </div>
+
+      <!-- Has Club View -->
+      <div id="view-has-club" style="display: none; flex-direction: column; height: 100%;">
+
+        <!-- Club Header Info -->
+        <div class="card" style="margin: 20px; text-align: center; padding: 20px;">
+          <div id="club-name-display"
+            style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 10px;">
+            <h2 id="text-club-name" style="font-family: var(--font-display); font-weight: 700; margin: 0;">Club Name
+            </h2>
+            <button id="btn-edit-club-name" class="btn btn-sm hidden"
+              style="padding: 4px 8px; background: var(--bg-secondary); border: 1px solid var(--border-color); font-size: 0.9rem; color: var(--text-main); border-radius: var(--radius-sm); margin-left: 8px;">Edit</button>
+          </div>
+
+          <div id="club-name-edit" class="hidden" style="margin-bottom: 15px;">
+            <div class="input-group" style="display: flex; gap: 10px; margin-bottom: 0;">
+              <input type="text" id="input-edit-club-name" maxlength="30" style="flex: 1;">
+              <button class="btn btn-primary btn-sm" id="btn-save-club-name">Save</button>
+            </div>
+          </div>
+
+          <div
+            style="background-color: var(--bg-secondary); padding: 12px; border-radius: var(--radius-sm); border: 1px dashed var(--border-color); display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px;">
+            <div>
+              <div
+                style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; margin-bottom: 4px;">
+                Invite Code</div>
+              <div id="text-club-code"
+                style="font-size: 1.4rem; font-weight: 800; letter-spacing: 3px; font-family: monospace; color: var(--primary-color);">
+                ------</div>
+            </div>
+            <button class="btn btn-secondary btn-sm" id="btn-share-club">Share</button>
+          </div>
+
+          <div style="font-size: 0.85rem; color: var(--text-muted);">
+            <span id="text-club-member-count">0</span> members
+          </div>
+        </div>
+
+        <!-- Members List -->
+        <h3 style="padding: 0 20px; margin-bottom: 10px; font-size: 1rem; color: var(--text-muted);">Members</h3>
+        <div class="leaderboard-container" style="flex-grow: 1;">
+          <div id="club-members-list" class="leaderboard-list">
+            <!-- Dynamically populated rows -->
+          </div>
+        </div>
+
+        <div style="padding: 20px;">
+          <button class="btn btn-secondary btn-block" id="btn-leave-club"
+            style="border-color: #ff4d4d; color: #ff4d4d; background-color: transparent;">Leave Club</button>
+          <p id="text-leave-club-warning" class="input-hint text-center hidden"
+            style="color: #ff4d4d; margin-top: 8px;">Since you are the creator, leaving will delete the club.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Bottom Nav (Shared across screens) -->
+    <nav class="bottom-nav hidden">
+      <button class="nav-item" data-screen="mash">
+        <span class="nav-icon">
+          <svg class="retro-icon" viewBox="0 0 16 16" width="20" height="20" fill="currentColor">
+            <path d="M7 2h2v2H7zm-1 2h4v2H6zm-1 2h6v2H5zm-1 2h8v2H4zm-1 2h10v2H3zm-1 2h12v2H2zm-1 2h14v2H1z" />
+          </svg>
+        </span>
+        <span class="nav-label">Climb</span>
+      </button>
+      <button class="nav-item" data-screen="leaderboard">
+        <span class="nav-icon">
+          <svg class="retro-icon" viewBox="0 0 16 16" width="20" height="20" fill="currentColor">
+            <path d="M3 2h10v2H3zm-1 2h12v4h-2V6H4v2H2zm2 4h8v2H4zm2 2h4v2H6zm1 2h2v2H7zm-3 2h8v1H4z" />
+          </svg>
+        </span>
+        <span class="nav-label">Summit</span>
+      </button>
+      <button class="nav-item" data-screen="challenges">
+        <span class="nav-icon">
+          <svg class="retro-icon" viewBox="0 0 16 16" width="20" height="20" fill="currentColor">
+            <path d="M7 1h2v2H7zm3 2h2v2h-2zm2 3h2v2h-2zm0 4h-2v2h2zm-3 3H7v2h2zm-5-3H2v-2h2zm0-5H2v-2h2zm3 0h2v4H7z" />
+          </svg>
+        </span>
+        <span class="nav-label">Challenges</span>
+      </button>
+      <button class="nav-item" data-screen="clubs">
+        <span class="nav-icon">
+          <svg class="retro-icon" viewBox="0 0 16 16" width="20" height="20" fill="currentColor">
+            <path d="M7 1h2v2H7zM6 3h4v2H6zM5 5h6v2H5zM4 7h8v2H4zM3 9h10v7H9v-4H7v4H3z" />
+          </svg>
+        </span>
+        <span class="nav-label">Clubs</span>
+      </button>
+      <button class="nav-item" data-screen="profile">
+        <span class="nav-icon">
+          <svg class="retro-icon" viewBox="0 0 16 16" width="20" height="20" fill="currentColor">
+            <path d="M6 1h4v4H6zm-2 5h8v2H4zm-1 2h10v8H3z" />
+          </svg>
+        </span>
+        <span class="nav-label">Me</span>
+      </button>
+    </nav>
+
+  </div>
+
+  <!-- Settings Modal -->
+  <div id="settings-modal" class="modal-overlay hidden">
+    <div class="modal-content card">
+      <div class="modal-header"
+        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h3 style="margin: 0; font-family: var(--font-display); font-weight: 700;">Edit Profile</h3>
+        <button id="btn-close-settings" class="btn-close"
+          style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);">&times;</button>
+      </div>
+
+      <div style="text-align: center; margin-bottom: 20px;">
+        <div
+          style="width: 100px; height: 100px; border-radius: var(--radius-md); overflow: hidden; margin: 0 auto 10px; border: 2px dashed var(--border-color);">
+          <img id="settings-avatar-preview" src="" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <input type="file" id="input-update-avatar" accept="image/*" class="hidden">
+        <label for="input-update-avatar" class="btn btn-secondary btn-sm edit-photo-btn" style="cursor: pointer;">Change
+          Photo</label>
+      </div>
+
+      <form id="form-settings">
+        <!-- First Name -->
+        <div class="input-group">
+          <label for="input-settings-name">First Name</label>
+          <input type="text" id="input-settings-name" placeholder="Your first name" required
+            style="width: 100%; padding: 12px; border-radius: var(--radius-md); border: 2px solid var(--border-color); background-color: var(--bg-primary); color: var(--text-main); font-family: var(--font-body); font-size: 0.95rem; outline: none; transition: var(--transition);">
+        </div>
+
+        <!-- Gender (Disabled / Read Only) -->
+        <div class="input-group">
+          <label for="input-settings-gender">Gender</label>
+          <input type="text" id="input-settings-gender" disabled
+            style="width: 100%; padding: 12px; border-radius: var(--radius-md); border: 2px solid var(--border-color); background-color: var(--bg-secondary); color: var(--text-muted); font-family: var(--font-body); font-size: 0.95rem; cursor: not-allowed;">
+          <p class="input-hint" style="margin-top: 4px;">Gender cannot be changed.</p>
+        </div>
+
+        <!-- Vote Preference -->
+        <div class="input-group">
+          <label for="select-settings-vote-pref">I want to vote on</label>
+          <select id="select-settings-vote-pref" class="form-select" required
+            style="width: 100%; padding: 12px; border-radius: var(--radius-md); border: 2px solid var(--border-color); background-color: var(--bg-primary); color: var(--text-main); font-family: var(--font-body); font-size: 0.95rem; outline: none; transition: var(--transition);">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="everyone">Everyone</option>
+          </select>
+        </div>
+
+        <!-- Region -->
+        <div class="input-group">
+          <label for="select-settings-state">Region</label>
+          <div class="combobox-container" id="combobox-settings-region">
+            <input type="text" class="combobox-input" id="input-settings-state-search" placeholder="Type to search city..." autocomplete="off"
+              style="width: 100%; padding: 12px; border-radius: var(--radius-md); border: 2px solid var(--border-color); background-color: var(--bg-primary); color: var(--text-main); font-family: var(--font-body); font-size: 0.95rem; outline: none; transition: var(--transition);">
+            <input type="hidden" id="select-settings-state" required>
+            <div class="combobox-dropdown hidden">
+              <div class="combobox-options" id="options-settings-region"></div>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block" id="btn-save-settings">Save Changes</button>
+        <button type="button" class="btn btn-secondary btn-block" id="btn-logout"
+          style="margin-top: 10px; border-color: #ff4d4d; color: #ff4d4d;">Sign Out</button>
+      </form>
+      <div style="margin-top: 24px; padding-top: 20px; border-top: 2px dashed var(--border-color);">
+        <button type="button" class="btn btn-text btn-block" id="btn-delete-account"
+          style="color: #ff4d4d; font-size: 0.85rem;">Delete Account</button>
+        <p class="input-hint" style="text-align: center; margin-top: 6px;">This will permanently delete your account and all data.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Image Cropping Modal -->
+  <div id="crop-modal" class="modal-overlay hidden">
+    <div class="modal-content card" style="max-width: 320px; text-align: center;">
+      <h3 style="font-family: var(--font-display); font-weight: 700; margin-bottom: 5px;">Crop Photo</h3>
+      <p class="input-hint" style="margin-bottom: 15px;">Drag and zoom to focus on your face.</p>
+
+      <div class="crop-viewport-wrapper" style="margin: 0 auto 15px; position: relative; width: 250px; height: 250px;">
+        <div id="modal-crop-viewport" class="crop-viewport"
+          style="width: 250px; height: 250px; border-radius: var(--radius-md); overflow: hidden; border: 2px solid var(--border-color); position: relative; background-color: var(--bg-secondary); cursor: move;">
+          <img id="modal-crop-image" src="" alt="To Crop"
+            style="position: absolute; pointer-events: none; user-select: none; max-width: none;">
+        </div>
+      </div>
+
+      <div class="zoom-slider-container" style="display: flex; align-items: center; gap: 10px; margin: 15px 0;">
+        <span style="font-size: 0.9rem;">➖</span>
+        <input type="range" id="modal-crop-zoom" min="1" max="3" step="0.01" value="1"
+          style="flex: 1; cursor: pointer;">
+        <span style="font-size: 0.9rem;">➕</span>
+      </div>
+
+      <div style="display: flex; gap: 10px; margin-top: 20px;">
+        <button type="button" class="btn btn-secondary" id="btn-cancel-crop" style="flex: 1;">Cancel</button>
+        <button type="button" class="btn btn-primary" id="btn-apply-crop" style="flex: 1;">Apply</button>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Toast Notification System -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Supabase JS Client Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- Client Application Code -->
+  <script src="app.js"></script>
 </body>
+
 </html>
