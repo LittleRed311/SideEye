@@ -4,57 +4,67 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Side-Eye</title>
-    <meta name="description" content="WE MAKE MISTAKES. Climb higher.">
+    <meta name="description" content="WE MAKE MISTAKES. We make webapps for the Meta Ray-Ban displays.">
     <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <main>
-        <!-- Hero Section -->
-        <section class="hero" id="hero">
-            <h1 class="brand-text" aria-label="WEMAKEMISTAKES">
-                <span class="pair">WE</span>
-                <span class="pair">MA</span>
-                <span class="pair">KE</span>
-                <span class="pair">MI</span>
-                <span class="pair">ST</span>
-                <span class="pair">AK</span>
-                <span class="pair">ES</span>
-            </h1>
-            <div class="scroll-indicator" onclick="document.getElementById('climb-section').scrollIntoView({ behavior: 'smooth' })">
-                <span>SCROLL</span>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="12" y1="5" x2="12" y2="19"></line>
-                    <polyline points="19 12 12 19 5 12"></polyline>
-                </svg>
-            </div>
-        </section>
-
-        <!-- Climb Section -->
-        <section class="climb-section" id="climb-section">
-            <a href="https://climb.side-eye.xyz" target="_blank" class="climb-card" rel="noopener noreferrer">
-                <div class="climb-header">
-                    <div class="climb-logo">
-                        <!-- Climb Favicon SVG -->
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="32" height="32" aria-hidden="true">
-                            <rect width="16" height="16" fill="#bbdefb"/>
-                            <path d="M7 4h2v2H7zm-1 2h4v2H6zm-1 2h6v2H5zm-1 2h8v2H4zm-1 2h10v2H3z" fill="#ffffff"/>
-                        </svg>
-                    </div>
-                    <span class="climb-title">CLIMB</span>
-                </div>
-                <p class="climb-caption">Step up and make your way to the top.</p>
-                <div class="climb-action">
-                    <span>Visit climb.side-eye.xyz</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
-                </div>
-            </a>
-        </section>
-    </main>
+    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="main-table">
+        <tr>
+            <td>
+                <!-- Header line -->
+                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                    <tr>
+                        <td class="header-cell">
+                            <b>Side-Eye</b>
+                        </td>
+                    </tr>
+                </table>
+                <hr size="1" color="#cccccc" class="header-divider">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <!-- Page Layout -->
+                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                    <tr valign="top">
+                        <!-- Sidebar Links -->
+                        <td width="120" class="sidebar">
+                            <table border="0" cellpadding="2" cellspacing="0">
+                                <tr><td><a href="index.html">Home</a></td></tr>
+                                <tr><td><a href="https://climb.side-eye.xyz" target="_blank" rel="noopener noreferrer">Climb</a></td></tr>
+                                <tr><td><a href="mailto:anything@vexaiulkoo.resend.app">Contact</a></td></tr>
+                            </table>
+                        </td>
+                        <!-- Vertical spacer -->
+                        <td width="30"></td>
+                        <!-- Main Content -->
+                        <td class="content-cell">
+                            <h1>WE MAKE MISTAKES.</h1>
+                            
+                            <p>We make webapps for the Meta Ray-Ban displays.</p>
+                            
+                            <p>Our focus is building lightweight, glanceable interfaces and simple web experiences optimized for smart glasses and heads-up displays.</p>
+                            
+                            <p>
+                                <b>Projects:</b>
+                            </p>
+                            <ul>
+                                <li>
+                                    <a href="https://climb.side-eye.xyz" target="_blank" rel="noopener noreferrer"><b>Climb</b></a> - Step up and make your way to the top.
+                                </li>
+                            </ul>
+                            
+                            <p>
+                                <b>Contact:</b>
+                            </p>
+                            <p>
+                                Email us at <a href="mailto:anything@vexaiulkoo.resend.app">anything@vexaiulkoo.resend.app</a>.
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
 </body>
 </html>
